@@ -1,0 +1,36 @@
+# Global Ignore Files for Ecommerce Analytics Project
+
+# Ignore CSV data files
+
+# Ignore system and IDE files
+.DS_Store
+.vscode/
+.idea/
+
+# Ignore logs
+*.log
+
+# Ignore environment files
+.env
+*.env
+
+# Ignore temporary files
+*.tmp
+*.bak
+
+# Ignore package and dependency caches
+node_modules/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore build and distribution directories
+build/
+dist/
+*.egg-info/
+
+# Ignore testing and coverage reports
+.coverage
+htmlcov/
+.pytest_cache/

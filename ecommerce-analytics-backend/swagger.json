@@ -1,0 +1,217 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "E-commerce Analytics API",
+    "version": "1.0.0",
+    "description": "API pour l'analyse des paniers d'achat et des performances e-commerce",
+    "contact": {
+      "name": "Support Technique",
+      "email": "support@ecommerce-analytics.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000",
+      "description": "Serveur local de développement"
+    },
+    {
+      "url": "https://api.ecommerce-analytics.com",
+      "description": "Serveur de production"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Analytics",
+      "description": "Endpoints pour l'analyse des ventes et des performances"
+    },
+    {
+      "name": "Produits",
+      "description": "Endpoints pour la gestion et l'analyse des produits"
+    }
+  ],
+  "paths": {
+    "/analytics/total_sales": {
+      "get": {
+        "summary": "Obtenir le montant total des ventes",
+        "tags": ["Analytics"],
+        "parameters": [
+          {
+            "name": "period",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["7", "30", "365"],
+              "default": "30"
+            },
+            "description": "Période des ventes (7, 30, 365 jours)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Montant total des ventes récupéré avec succès",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "totalSales": {
+                      "type": "number",
+                      "description": "Montant total des ventes pour la période spécifiée"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Requête invalide"
+          },
+          "500": {
+            "description": "Erreur serveur"
+          }
+        }
+      }
+    },
+    "/analytics/trending_products": {
+      "get": {
+        "summary": "Obtenir les produits les plus vendus",
+        "tags": ["Analytics"],
+        "parameters": [
+          {
+            "name": "period",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": ["7", "30", "365"]
+            },
+            "description": "Période des ventes (7, 30, 365 jours)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Liste des produits les plus vendus",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "example": "Produit A"
+                      },
+                      "quantitySold": {
+                        "type": "number",
+                        "example": 100
+                      },
+                      "totalSales": {
+                        "type": "number",
+                        "example": 1999.00
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erreur serveur"
+          }
+        }
+      }
+    },
+    "/analytics/category_sales": {
+      "get": {
+        "summary": "Obtenir la répartition des ventes par catégorie",
+        "tags": ["Analytics"],
+        "parameters": [
+          {
+            "name": "period",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": ["7", "30", "365"]
+            },
+            "description": "Période des ventes (7, 30, 365 jours)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Répartition des ventes par catégorie",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "category": {
+                        "type": "string",
+                        "example": "Catégorie 1"
+                      },
+                      "sales": {
+                        "type": "number",
+                        "example": 5000.00
+                      },
+                      "percentage": {
+                        "type": "number",
+                        "example": 40.0
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erreur serveur"
+          }
+        }
+      }
+    },
+    "/products": {
+      "get": {
+        "summary": "Obtenir la liste des produits avec leurs ventes totales",
+        "tags": ["Produits"],
+        "responses": {
+          "200": {
+            "description": "Liste des produits",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "example": "Produit A"
+                      },
+                      "category": {
+                        "type": "string",
+                        "example": "Catégorie 1"
+                      },
+                      "price": {
+                        "type": "number",
+                        "example": 19.99
+                      },
+                      "totalSales": {
+                        "type": "number",
+                        "example": 4
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erreur serveur"
+          }
+        }
+      }
+    }
+  }
+}
