@@ -18,7 +18,7 @@
 
 1. Clonez le projet :
 ```bash
-git clone [url-du-projet]
+git clone [https://github.com/hattiti-mohammed/ecommerce-analytics.git]
 ```
 
 2. Installation des dépendances du backend :
